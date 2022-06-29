@@ -1,14 +1,24 @@
-<template>
-	<div id="app">
-		<router-link to="/login">Login</router-link> - 
-		<router-link to="/register">Register</router-link>
-		<router-view></router-view>
-	</div>
+<template>	
+	<span v-if="isLoggedIn">
+		<div class="navbar">
+			<a v-on:click="logout">Logout</a>
+		</div>		
+    </span>
+	<router-view></router-view>	
 </template>
 
 <script>
 	export default {
-		name: 'app'
+	  name: 'app',
+	  computed : {
+		  isLoggedIn : function(){ return localStorage.getItem("token") !== null}
+		},
+		methods: {
+		  logout (){
+			localStorage.removeItem("token")
+			window.location.href = '/login'
+		  }
+		},
 	}
 </script>
 
