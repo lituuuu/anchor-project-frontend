@@ -77,7 +77,7 @@
 						<div class="row">
 							<div class="col-md-3" v-for="(file, index) in fileInfos" :key="index">
 							  <div class="card mb-3 box-shadow" style="margin-top:10px;">
-								<img class="card-img-top" :src="file.photo_bucket" alt="Card image cap">
+								<img class="card-img-top" :src="file.photo_bucket" alt="Card image cap" v-bind:class="(file.pendent)?'opacity_pendent':''">
 								<div class="card-body">
 								  <div class="d-flex justify-content-between align-items-center">
 									<div class="btn-group">
