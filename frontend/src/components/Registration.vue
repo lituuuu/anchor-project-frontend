@@ -61,7 +61,7 @@
         },
 		methods: {
 			postRegister(data){
-				ApiService.register(this.username, this.password, this.password).then((response)=> 
+				ApiService.register(this.username, this.password, this.email).then((response)=> 
 					window.location.href = '/login'
 				).catch((b)=> {
 				console.log(b)
