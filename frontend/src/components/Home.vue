@@ -34,8 +34,7 @@
 									{{ progress }}%
 								</div>
 							</div>
-							<div class="alert alert-success" role="alert" v-if="alertSuccess">{{ message }}</div>
-							<div class="alert alert-danger" role="alert" v-if="alertDanger">{{ message }}</div>
+							<div v-bind:class="{alert: true, 'alert-danger': !alert.success, 'alert-success': alert.success}" role="alert" v-if="alert.show">{{ message }}</div>
 						</div>						
 					</div>
 				</div>
@@ -101,9 +100,11 @@
 				fileInfos: [],
 				divPhotoExpand: false,
 				photoExpanded: null,
-				photoId: null,
-				alertDanger: false,
-				alertSuccess: false,
+				photoId: null,				
+				alert: {
+					success: true,
+					show: false,
+				},
 				photoNotApproved: false,
 				skip: 0,
 				limit: 12,
@@ -115,8 +116,7 @@
 			  this.selectedFiles = this.$refs.file.files;
 			},
 			upload() {
-				this.alertSuccess= false
-				this.alertDanger= false
+				this.alert.show = false
 				this.progress = 0;
 				this.currentFile = this.selectedFiles.item(0);
 				ApiService.upload(this.currentFile, event => {
@@ -124,16 +124,17 @@
 				})
 				.then(response => {
 					this.message = "Image uploaded with success";
-					this.alertSuccess= true
-					return ApiService.getPhotos();
+					this.alert.show = true
+					this.alert.success = true
+					this.skip = 0
+					document.location.reload(true)
 				})
-				.then(files => {
-					this.fileInfos = files.data;
-				})
-				.catch(() => {
+				.catch((e) => {
+					console.log(e)
 					this.progress = 0;
-					this.message = "Could not upload the file!";
-					this.alertDanger= true
+					this.message = e;
+					this.alert.show = true
+					this.alert.success = false
 					this.currentFile = undefined;
 				});
 				this.selectedFiles = undefined;
