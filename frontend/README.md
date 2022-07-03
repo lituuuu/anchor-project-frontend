@@ -1,4 +1,9 @@
-# frontend
+# anchor-project-frontend
+
+This project is a code challenge.
+It's a Vue.js (3) project.
+Go to frontend folder and use the command:
+``npm install``
 
 ## Project setup
 ```
@@ -15,10 +20,8 @@ npm run serve
 npm run build
 ```
 
-### Lints and fixes files
-```
-npm run lint
-```
+## Configuration
+The file ```src/http-common.js``` is required to set an api URL:
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+            baseURL: "http://localhost:5000",
+
