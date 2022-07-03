@@ -1,5 +1,15 @@
 <template>
-	<div class="album py-5">
+	<div class="album" v-if="alert.show">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<div v-bind:class="{alert: true, 'alert-danger': !alert.success, 'alert-success': alert.success}" role="alert">{{ message }}</div>
+				</div>
+			</div>
+		</div>
+	</div>
+		
+	<div class="album py-2">
 		<div class="container">
 			<div class="row">		
 				<div class="col-md-3"></div>
@@ -33,8 +43,7 @@
 								>
 									{{ progress }}%
 								</div>
-							</div>
-							<div v-bind:class="{alert: true, 'alert-danger': !alert.success, 'alert-success': alert.success}" role="alert" v-if="alert.show">{{ message }}</div>
+							</div>							
 						</div>						
 					</div>
 				</div>
@@ -43,6 +52,19 @@
 		</div>
 	</div>
 
+	<div class="album py-5 bg-light">
+		<div class="container">
+		  <div class="row">
+			<div class="col-md-12">
+				<button class="btn" style="width: 100%" @click="morePhotos" v-if="!maxImage">
+					More
+				</button>
+			</div>
+			
+		  </div>
+		</div>
+	  </div>
+
 
 	<div class="album">
 		<div class="container">
@@ -50,27 +72,21 @@
 				<div class="col-md-12" >
 					<div class="card mb-4 box-shadow">
 						<div class="card-header text-center">
-							Upload Photo (.jpg or .jpeg)
+							Uploaded Photos (.jpg or .jpeg)
 						</div>
-						<div class="card-body">
-							<div class="row">
-								<div
-								  class="col-md-2"
-								  v-for="(file, index) in fileInfos"
-								  :key="index"
-								>
-									<a :href="'/photo/'+file._id.$oid">
-										<img :src="file.photo_bucket" v-bind:class="(file.pendent)?'opacity_pendent':''" class="grid-image" />
-									</a>
-								</div>	
-								
-								<div class="col-md-12">
-									<br/>
-									<button class="btn" style="width: 100%" @click="morePhotos" v-if="!maxImage">
-										More
-									</button>
+						
+						<div class="col-md-3" v-for="(file, index) in fileInfos" :key="index">
+						  <div class="card mb-3 box-shadow" style="margin-top:10px;">
+							<img class="card-img-top" :src="file.photo_bucket" alt="Card image cap">
+							<div class="card-body">
+							  <div class="d-flex justify-content-between align-items-center">
+								<div class="btn-group">
+								  <a :href="'/photo/' + file._id.$oid" class="btn btn-sm">View</a>
+								  <button @click="removePhoto(file._id.$oid)" class="btn btn-sm">Remove</button>								  
 								</div>
-							</div>						
+							  </div>
+							</div>
+						  </div>
 						</div>
 					</div>
 				
@@ -129,8 +145,7 @@
 					this.skip = 0
 					document.location.reload(true)
 				})
-				.catch((e) => {
-					console.log(e)
+				.catch((e) => {					
 					this.progress = 0;
 					this.message = e;
 					this.alert.show = true
@@ -149,6 +164,16 @@
 					this.skip++
 					this.loading = false
 				});
+			},
+			removePhoto(id){
+				ApiService.removePhoto(id).then(response => {
+					document.location.reload(true);
+				}).catch((e)=> {
+				console.log(e)
+					this.message = e.response.statusText;
+					this.alert.show = true
+					this.alert.success = false
+				});;	
 			}
 		},
 		mounted() {

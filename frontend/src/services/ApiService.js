@@ -29,6 +29,14 @@ class ApiService {
 			id: id
 		},config);
 	}	
+	removePhoto(id) {
+		let config = {
+			headers: {
+				"x-access-token": localStorage.getItem("token"),
+			}
+		}
+		return http.delete("/gallery/"+id, config);
+	}	
 	getConfirmedPhotos(limit, page) {
 		return http.get("/gallery/confirmed?limit="+limit+"&page="+page);
 	}
