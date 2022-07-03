@@ -74,19 +74,20 @@
 						<div class="card-header text-center">
 							Uploaded Photos (.jpg or .jpeg)
 						</div>
-						
-						<div class="col-md-3" v-for="(file, index) in fileInfos" :key="index">
-						  <div class="card mb-3 box-shadow" style="margin-top:10px;">
-							<img class="card-img-top" :src="file.photo_bucket" alt="Card image cap">
-							<div class="card-body">
-							  <div class="d-flex justify-content-between align-items-center">
-								<div class="btn-group">
-								  <a :href="'/photo/' + file._id.$oid" class="btn btn-sm">View</a>
-								  <button @click="removePhoto(file._id.$oid)" class="btn btn-sm">Remove</button>								  
+						<div class="row">
+							<div class="col-md-3" v-for="(file, index) in fileInfos" :key="index">
+							  <div class="card mb-3 box-shadow" style="margin-top:10px;">
+								<img class="card-img-top" :src="file.photo_bucket" alt="Card image cap">
+								<div class="card-body">
+								  <div class="d-flex justify-content-between align-items-center">
+									<div class="btn-group">
+									  <a :href="'/photo/' + file._id.$oid" class="btn btn-sm">View</a>
+									  <button @click="removePhoto(file._id.$oid)" class="btn btn-sm">Remove</button>								  
+									</div>
+								  </div>
 								</div>
 							  </div>
 							</div>
-						  </div>
 						</div>
 					</div>
 				
