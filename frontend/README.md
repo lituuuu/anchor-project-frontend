@@ -24,3 +24,7 @@ The file ```src/http-common.js``` is required to set an api URL:
 
             baseURL: "http://localhost:5000",
 
+
+## MIRO
+Link to miro:
+            https://miro.com/app/board/uXjVOowRBqc=/?share_link_id=810673260633
