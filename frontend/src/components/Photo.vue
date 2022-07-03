@@ -123,14 +123,13 @@
 			},
 			like(){
 				if(this.isLoggedIn){
+					this.image.like.hasLike = !this.image.like.hasLike
+					if (this.image.like.hasLike){
+						this.image.like.count++
+					}else{
+						this.image.like.count--
+					}
 					ApiService.postLike(this.image.id).then(response => {
-						if (response.data._id == null){
-							this.image.like.hasLike = false;
-							this.image.like.count--;
-						}else{
-							this.image.like.hasLike = true;
-							this.image.like.count++;
-						}
 					}).catch((b)=> {
 						console.log(b)
 					});;
