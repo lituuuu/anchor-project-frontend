@@ -3,7 +3,6 @@
 This project is a code challenge.
 It's a Vue.js (3) project.
 Go to frontend folder and use the command:
-``npm install``
 
 ## Project setup
 ```
