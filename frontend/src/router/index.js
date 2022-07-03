@@ -16,13 +16,29 @@ const routes = [
     component: () => import('../components/Login.vue')
   },
   {
-    path: '/',
-    name: 'Home',
+    path: '/home',
+    name: 'home',
     component: () => import('../components/Home.vue'),
 	meta: {
       requiresAuth: true
     }
   },
+  {
+    path: '/',
+    name: 'initialPage',
+    component: () => import('../components/InitialPage.vue'),
+	meta: {
+      requiresAuth: false
+    }
+  },
+  {
+    path: '/photo/:id',
+    name: 'Photo',
+    component: () => import('../components/Photo.vue'),
+	meta: {
+      requiresAuth: false
+    }
+  }
 ]
 
 const router = createRouter({
@@ -31,8 +47,9 @@ const router = createRouter({
 });
 
 
-router.beforeEach((to, from, next) => {
+router.beforeEach((to, from, next) => {	
   if (to.name === 'login') {
+    localStorage.removeItem("token")
     next() 
   } else if (to.meta && to.meta.requiresAuth === false) {
     next() 

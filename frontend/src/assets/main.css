@@ -1,12 +1,197 @@
-.form-group{
-	padding: 10px;
+:root {
+  --jumbotron-padding-y: 3rem;
 }
 
-.card{
-	padding: 10px;
-	border: 1px solid;
+.navbar{
+	background-color: #fa7f72 !important;
 }
 
-.card a {
-	padding: 5px;	
+#navbarHeader{
+	background-color: #fdcfca !important;
+	color: #111111 !important;
+}
+
+#navbarHeader h4{
+	color: #111111 !important;
+}
+
+#navbarHeader a{
+	color: #111111 !important;
+}
+
+.navbar-toggler:focus{
+	outline-color: #FFF;
+}
+
+.btn {
+	outline-color: #FFF !important;
+	color: #fa7f72;
+	background-color: #fff;
+	border-color: #fa7f72;
+}
+
+.btn:hover {
+	outline-color: #FFF !important;
+	color: #fff;
+	background-color: #fa7f72;
+	border-color: #FFF;
+}
+
+.btn:active {
+	outline-color: #FFF !important;
+	color: #fff;
+	background-color: #fa7f72;
+	border-color: #FFF;
+}
+
+.jumbotron {
+  padding-top: var(--jumbotron-padding-y);
+  padding-bottom: var(--jumbotron-padding-y);
+  margin-bottom: 0;
+  background-color: transparent !important;
+}
+@media (min-width: 768px) {
+  .jumbotron {
+    padding-top: calc(var(--jumbotron-padding-y) * 2);
+    padding-bottom: calc(var(--jumbotron-padding-y) * 2);
+  }
+}
+
+.jumbotron::after {
+  content: "";
+  background: url("https://i.ytimg.com/vi/BecH-EyS780/maxresdefault.jpg") center no-repeat;
+  background-size: cover;
+  opacity: 0.1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
+}
+
+
+.jumbotron p:last-child {
+  margin-bottom: 0;
+}
+
+.jumbotron-heading {
+  font-weight: bold;
+  color: #fa7f72;
+}
+
+.jumbotron .container {
+  max-width: 40rem;
+}
+
+footer {
+  padding-top: 3rem;
+  padding-bottom: 3rem;
+}
+
+footer p {
+  margin-bottom: .25rem;
+}
+
+.box-shadow { box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05); }
+
+.text-muted{ color: #000 !important; }
+
+.float-right a{
+	color: #fa7f72;
+	font-weight: bold;
+}
+
+b{
+	color: #fa7f72;
+}
+
+.text-center{
+	text-align: center;
+}
+
+.card-header{
+	background-color: #fa7f72;
+	color: #FFF;
+}
+
+.card-footer{
+	background-color: #fa7f72;
+	color: #FFF;
+}
+
+.card-footer a {
+	color: #FFF !important;
+}
+
+.background-without-login{
+	position: fixed;	
+	z-index: -1;
+	opacity:0.3;
+	width: 800px !important;
+	height: 700px !important;
+	right: 0 !important;
+	bottom: 0 !important;
+	background: url("https://www.pngkit.com/png/full/86-865925_stock-a-e-orig-png-pinterest-aaeorigpng-groom.png") center;
+	background-size: cover;
+}
+
+.alert{
+	margin-top: 10px !important;
+}
+
+.opacity_pendent{
+	opacity: 0.2;
+}
+
+.grid-image{
+	width: 100% !important; 
+	height: 100% !important;
+}
+
+.custom_loading{
+	background-color: #FFF; 
+	width: 100%; 
+	height: 100%; 
+	position: fixed; 
+	z-index:999; 
+	top: 0; 
+	left: 0;
+}
+
+.custom_loading img{
+	width: 400px; 
+	height: 300px; 
+	position: fixed; 
+	top: 50%; 
+	left: 50%; 
+	margin-top: -200px !important; 
+	margin-left: -150px !important;
+}
+
+.like-button{
+	border: none;
+	background-color: transparent;
+	color: #fa7f72;
+	cursor: pointer;
+	outline: 0 !important;
+}
+.like-button:active{
+	outline: 0 !important;
+}
+.like-button:active{
+	outline: 0 !important;
+}
+
+input:focus {
+	outline: 0 !important;
+}
+
+.comment {
+	border-bottom: 1px solid #EEE;
+}
+
+.comment small{
+	color: #AAA;
+	
 }

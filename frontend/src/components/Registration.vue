@@ -1,44 +1,56 @@
 <template>
-    <div class="card">
-            <h3>Sign Up</h3>
- 
-            <div class="form-group">
-                <label>Full Name</label>
-                <input type="text" class="form-control form-control-lg" name="login" v-model="login" placeholder="Login"/>
-            </div>
- 
-            <div class="form-group">
-                <label>Email address</label>
-                <input type="email" class="form-control form-control-lg" name="email" v-model="email" placeholder="Email" />
-            </div>
- 
-            <div class="form-group">
-                <label>Password</label>
-                <input type="password" class="form-control form-control-lg" name="password" v-model="password" placeholder="Password"/>
-            </div>
- 
-            <button class="btn btn-primary btn-block" v-on:click="postRegister">Sign Up</button>
-
-			<hr>
-			
-			<div class="alert alert-danger" role="alert" :style="alertStyle">
-				{{alerts.message}}
+	<div class="album py-5">
+		<div class="container">
+			<div class="row">		
+				<div class="col-md-3"></div>
+				<div class="col-md-6" >
+					<div class="card mb-4 box-shadow">
+						<div class="card-header text-center">
+							Sign Up
+						</div>
+						<div class="card-body">
+							<div class="form-group">
+								<label>Username</label>
+								<input type="text" class="form-control" name="username" v-model="username" placeholder="Username"/>
+							</div>
+				 
+							<div class="form-group">
+								<label>Password</label>
+								<input type="password" class="form-control" name="password" v-model="password" placeholder="Password" />
+							</div>
+							
+							<div class="form-group">
+								<label>Email address</label>
+								<input type="email" class="form-control" name="email" v-model="email" placeholder="Email" />
+							</div>
+				 
+				 
+							<div class="form-group">								
+								<button class="btn btn-block" style="width:100%" v-on:click="postRegister">Sign Up</button>
+								<div class="alert alert-danger" role="alert" :style="alertStyle">
+									{{alerts.message}}
+								</div>
+							</div>
+						</div>
+						<div class="card-footer text-center">
+							Has Account? <router-link :to="{name: 'login'}">Sign in</router-link>
+						</div>
+					</div>
+				</div>
+				
 			</div>
-
-            <p class="forgot-password text-right">
-                Already registered 
-                <router-link :to="{name: 'login'}">Sign in</router-link>
-            </p>
-    </div>
+		</div>
+	</div>
+	<div class="background-without-login"></div>
 </template>
  
 <script>
-	import axios from 'axios'
+	import ApiService from "../services/ApiService"
 		
     export default {
         data() {
             return {
-				login: null,
+				username: null,
 				email: null,
 				password: null,
 				alerts: {
@@ -49,16 +61,13 @@
         },
 		methods: {
 			postRegister(data){
-				axios.post("http://127.0.0.1:5000/register", {
-					login:this.login,
-					email:this.email,
-					password:this.password,
-				}, { validateStatus: (status) => status === 200 }).then((response)=> 
+				ApiService.register(this.username, this.password, this.password).then((response)=> 
 					window.location.href = '/login'
 				).catch((b)=> {
-					this.alerts.message = "Error, try another username"
+				console.log(b)
+					this.alerts.message = b.response.data.message
 					this.alerts.display = "inherit"
-				});
+				});			
 			}
 		},
 		 computed: {
